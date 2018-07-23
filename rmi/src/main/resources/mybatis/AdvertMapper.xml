@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="isec.rmi.lx.ad.mapper.AdvertMapper">
+
+	<resultMap id="AdvertResultMapper" type="isec.rmi.lx.ad.pojo.Advert" />
+
+	<select id="getAdvert" resultMap="AdvertResultMapper">
+		select
+		advert_id,name,icon,sort,img_url,link_url,enum_value,remark from
+		advert where advert_id = #{advertId}
+	</select>
+
+	<insert id="saveAdvert">
+		insert into
+		advert(advert_id,name,icon,sort,img_url,link_url,enum_value,remark)
+		values(#{advert.advertId},#{advert.name},#{advert.icon},#{advert.sort},#{advert.imgUrl},#{advert.linkUrl},#{advert.enumValue},#{advert.remark})
+	</insert>
+
+	<update id="updateAdvert">
+		update advert set
+		name=#{advert.name},icon=#{advert.icon},sort=#{advert.sort},
+		img_url=#{advert.imgUrl},link_url=#{advert.linkUrl},enum_value=#{advert.enumValue},remark=#{advert.remark}
+		where
+		advert_id=#{advert.advertId}
+	</update>
+
+	<delete id="deleteAdvert">
+		delete from advert where advert_id=#{advertId}
+	</delete>
+
+	<select id="getAdvertList" resultMap="AdvertResultMapper">
+		select advert_id from
+		advert order by sort asc
+		limit #{start},#{n}
+	</select>
+
+
+</mapper>
